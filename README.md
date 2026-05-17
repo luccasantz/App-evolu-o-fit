@@ -1,25 +1,256 @@
-# Roadmap Frontend 2023
+import 'package:flutter/material.dart';
 
-<aside>
-✅ Aprenda a programar do zero ao profissional:
-https://mapadaprogramacao.com.br/
-</aside>
-<br/>
-<aside>
-⭐ Não deixe de deixar o seu start no repositório.
-</aside>
+void main() => runApp(const MyApp());
 
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-# 1. Como funciona a internet?
-- Pesquisar artigos e vídeos de como funciona a internet
-- O que é HTTP
-- Funcionamento de um browser
-- DNS
-- Hosting
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Evolução Fit',
+      theme: ThemeData(
+        // Tema escuro base
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Colors.black,
+        primaryColor: const Color(0xFF00FF9C), // Verde neon vibrante
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(color: Colors.white70),
+          bodySmall: TextStyle(color: Colors.white54),
+        ),
+      ),
+      home: const LoginScreen(),
+    );
+  }
+}
 
-# 2. Lógica de Programação
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-Antes de ir para linguagem de programação e passar para o roadmap de qualquer uma das áreas, o ideal é que você estude a lógica de programação, que irá treinar o seu raciocínio para resolução de problemas através de pseudo códigos. Existem diversas formas de se estudar essa matéria, mas minha indicação é  que você estude através de algoritmos em Portugol.
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _obscurePassword = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Logo/Cabeçalho
+            const Center(
+              child: Column(
+                children: [
+                  // Ícone circular (substitua pelo seu logo)
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: Colors.black,
+                    child: Icon(
+                      Icons.fitness_center_outlined, // Ícone de academia
+                      size: 40,
+                      color: Color(0xFF00FF9C),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Bem-vindo de volta',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    'Acesse sua conta para continuar',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
+
+            // Campo Email/Usuário
+            const Text(
+              'Email ou Usuário',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                hintText: 'seu@email.com',
+                hintStyle: const TextStyle(color: Colors.white54),
+                filled: true,
+                fillColor: const Color(0xFF1A1A1A), // Cinza muito escuro
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF00FF9C)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF00FF9C), width: 2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Campo Senha
+            const Text(
+              'Senha',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              style: const TextStyle(color: Colors.white),
+              obscureText: _obscurePassword,
+              decoration: InputDecoration(
+                hintText: 'Digite sua senha',
+                hintStyle: const TextStyle(color: Colors.white54),
+                filled: true,
+                fillColor: const Color(0xFF1A1A1A),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF00FF9C)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: const BorderSide(color: Color(0xFF00FF9C), width: 2),
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white54,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            // Link Esqueceu a senha?
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  // Ação para recuperar senha
+                },
+                child: const Text(
+                  'Esqueceu a senha?',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Botão Entrar
+            ElevatedButton(
+              onPressed: () {
+                // Ação para entrar na conta
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: const Color(0xFF00FF9C),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: const BorderSide(color: Color(0xFF00FF9C)),
+                ),
+                elevation: 2,
+                shadowColor: const Color(0xFF00FF9C).withOpacity(0.5),
+              ),
+              child: const Text(
+                'Entrar',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Divisor "ou"
+            const Row(
+              children: [
+                Expanded(child: Divider(color: Colors.white30)),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('ou', style: TextStyle(color: Colors.white54)),
+                ),
+                Expanded(child: Divider(color: Colors.white30)),
+              ],
+            ),
+            const SizedBox(height: 20),
+
+            // Botão Biometria
+            OutlinedButton(
+              onPressed: () {
+                // Ação para entrar com biometria
+              },
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                side: const BorderSide(color: Color(0xFF00FF9C)),
+                elevation: 2,
+                shadowColor: const Color(0xFF00FF9C).withOpacity(0.5),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.fingerprint, color: Color(0xFF00FF9C), size: 20),
+                  SizedBox(width: 8),
+                  Text(
+                    'Entrar com Biometria',
+                    style: TextStyle(
+                      color: Color(0xFF00FF9C),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
+
+            // Link Criar Conta
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  // Ação para criar conta
+                },
+                child: const Text(
+                  'Não tem uma conta? Criar conta',
+                  style: TextStyle(color: Color(0xFF00FF9C)),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 Site para treinar e aprender portugol:
 
